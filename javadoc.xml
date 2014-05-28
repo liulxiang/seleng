@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="beidou_selenium_driver_doc" default="javadoc" basedir=".">
+	<!--配置基本属性-->
+	<property name="src" value="src" />
+	<property name="docs" value="docs" />
+
+	<!--清理环境-->
+	<target name="clean">
+		<tstamp />
+		<delete dir="${docs}" />
+	</target>
+
+	<!--任务初始化-->
+	<target name="init" depends="clean">
+		<mkdir dir="${docs}" />
+	</target>
+
+	<!--生成javadoc-->
+	<target name="javadoc" depends="init">
+		<javadoc destdir="${docs}" encoding="utf-8" charset="utf-8" sourcepath="${src}" packagenames="com.baidu.beidou.*" />
+	</target>
+</project>

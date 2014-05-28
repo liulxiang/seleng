@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="beidou_selenium_driver" default="dist" basedir=".">
+
+	<!--配置基本属性-->
+	<property name="src" value="src" />
+	<property name="build" value="build" />
+	<property name="lib" value="lib" />
+	<property name="dist" value="dist" />
+	<property name="log" value="log" />
+	<property name="classpath" location="${build}" />
+
+	<!--配置运行时classpath-->
+	<path id="classpath.run">
+		<pathelement path="${classpath}" />
+		<fileset dir="${lib}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+	
+	<!--任务初始化-->
+	<target name="init">
+		<tstamp />
+		<delete dir="${build}" />
+		<delete dir="${dist}" />
+		<delete dir="${log}" />
+	</target>
+
+	<!--配置编译任务-->
+	<target name="compile" depends="init">
+		<mkdir dir="${build}" />
+		<javac srcdir="${src}" destdir="${build}" includeantruntime="on" encoding="UTF-8">
+			<!--<compilerarg line="-encoding gbk" />-->
+			<classpath refid="classpath.run" />
+		</javac>
+	</target>
+
+	<!--配置打包任务-->
+	<target name="dist" depends="compile">
+		<mkdir dir="${dist}" />
+		<jar jarfile="${dist}/Selenium-driver.jar" basedir="${build}" />
+	</target>
+
+</project>
